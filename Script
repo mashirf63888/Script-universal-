@@ -1,0 +1,65 @@
+-- GUI de Grupo Roblox
+-- Cole este script em um LocalScript dentro de StarterPlayerScripts
+
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+-- Criar ScreenGui
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "GrupoGui"
+screenGui.ResetOnSpawn = false
+screenGui.Parent = playerGui
+
+-- Frame principal
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 320, 0, 160)
+frame.Position = UDim2.new(0.5, -160, 0.5, -80)
+frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.BorderSizePixel = 0
+frame.Parent = screenGui
+
+-- Borda arredondada
+local corner = Instance.new("UICorner")
+corner.CornerRadius = UDim.new(0, 12)
+corner.Parent = frame
+
+-- Texto principal
+local label = Instance.new("TextLabel")
+label.Size = UDim2.new(1, 0, 0.5, 0)
+label.Position = UDim2.new(0, 0, 0, 10)
+label.BackgroundTransparency = 1
+label.Text = "Entre no grupo do Roblox!"
+label.TextColor3 = Color3.fromRGB(255, 255, 255)
+label.TextScaled = true
+label.Font = Enum.Font.GothamBold
+label.Parent = frame
+
+-- Botão Copiar
+local button = Instance.new("TextButton")
+button.Size = UDim2.new(0.6, 0, 0, 45)
+button.Position = UDim2.new(0.2, 0, 0.58, 0)
+button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+button.Text = "Copiar"
+button.TextColor3 = Color3.fromRGB(255, 255, 255)
+button.TextScaled = true
+button.Font = Enum.Font.GothamBold
+button.BorderSizePixel = 0
+button.Parent = frame
+
+local btnCorner = Instance.new("UICorner")
+btnCorner.CornerRadius = UDim.new(0, 8)
+btnCorner.Parent = button
+
+-- Link a ser copiado
+local link = "https://linkurl.pk/Oo-vpilT"
+
+-- Ação do botão
+button.MouseButton1Click:Connect(function()
+    setclipboard(link)
+    button.Text = "Copiado! ✓"
+    button.BackgroundColor3 = Color3.fromRGB(0, 200, 80)
+    task.wait(2)
+    button.Text = "Copiar"
+    button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+end)
