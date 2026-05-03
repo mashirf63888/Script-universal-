@@ -52,7 +52,7 @@ btnCorner.CornerRadius = UDim.new(0, 8)
 btnCorner.Parent = button
 
 -- Link a ser copiado
-local link = "https://linkurl.pk/Oo-vpilT"
+local link = "https://l1nq.com/i0iWf"
 
 -- Ação do botão
 button.MouseButton1Click:Connect(function()
