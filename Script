@@ -1,46 +1,86 @@
--- GUI de Grupo Roblox
--- Cole este script em um LocalScript dentro de StarterPlayerScripts
+-- GUI Bloxlink Verificação
+-- Cole em um LocalScript dentro de StarterPlayerScripts
 
 local Players = game:GetService("Players")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
--- Criar ScreenGui
+-- ScreenGui
 local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "GrupoGui"
+screenGui.Name = "BloxlinkGui"
 screenGui.ResetOnSpawn = false
 screenGui.Parent = playerGui
 
+-- Fundo escurecido
+local overlay = Instance.new("Frame")
+overlay.Size = UDim2.new(1, 0, 1, 0)
+overlay.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+overlay.BackgroundTransparency = 0.5
+overlay.BorderSizePixel = 0
+overlay.Parent = screenGui
+
 -- Frame principal
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 320, 0, 160)
-frame.Position = UDim2.new(0.5, -160, 0.5, -80)
-frame.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+frame.Size = UDim2.new(0, 380, 0, 220)
+frame.Position = UDim2.new(0.5, -190, 0.5, -110)
+frame.BackgroundColor3 = Color3.fromRGB(18, 18, 28)
 frame.BorderSizePixel = 0
 frame.Parent = screenGui
 
--- Borda arredondada
 local corner = Instance.new("UICorner")
-corner.CornerRadius = UDim.new(0, 12)
+corner.CornerRadius = UDim.new(0, 16)
 corner.Parent = frame
 
--- Texto principal
-local label = Instance.new("TextLabel")
-label.Size = UDim2.new(1, 0, 0.5, 0)
-label.Position = UDim2.new(0, 0, 0, 10)
-label.BackgroundTransparency = 1
-label.Text = "Entre no grupo do Roblox!"
-label.TextColor3 = Color3.fromRGB(255, 255, 255)
-label.TextScaled = true
-label.Font = Enum.Font.GothamBold
-label.Parent = frame
+-- Barra superior colorida
+local topBar = Instance.new("Frame")
+topBar.Size = UDim2.new(1, 0, 0, 6)
+topBar.Position = UDim2.new(0, 0, 0, 0)
+topBar.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+topBar.BorderSizePixel = 0
+topBar.Parent = frame
 
--- Botão Copiar
+local topCorner = Instance.new("UICorner")
+topCorner.CornerRadius = UDim.new(0, 16)
+topCorner.Parent = topBar
+
+-- Ícone 🔗
+local icon = Instance.new("TextLabel")
+icon.Size = UDim2.new(1, 0, 0, 50)
+icon.Position = UDim2.new(0, 0, 0, 16)
+icon.BackgroundTransparency = 1
+icon.Text = "🔗"
+icon.TextScaled = true
+icon.Font = Enum.Font.GothamBold
+icon.Parent = frame
+
+-- Título
+local title = Instance.new("TextLabel")
+title.Size = UDim2.new(1, -20, 0, 30)
+title.Position = UDim2.new(0, 10, 0, 65)
+title.BackgroundTransparency = 1
+title.Text = "Verificação Necessária"
+title.TextColor3 = Color3.fromRGB(255, 255, 255)
+title.TextScaled = true
+title.Font = Enum.Font.GothamBold
+title.Parent = frame
+
+-- Subtítulo
+local sub = Instance.new("TextLabel")
+sub.Size = UDim2.new(1, -30, 0, 40)
+sub.Position = UDim2.new(0, 15, 0, 98)
+sub.BackgroundTransparency = 1
+sub.Text = "Entre no Bloxlink para se verificar\ne liberar o acesso!"
+sub.TextColor3 = Color3.fromRGB(180, 180, 210)
+sub.TextScaled = true
+sub.Font = Enum.Font.Gotham
+sub.Parent = frame
+
+-- Botão Copiar Link
 local button = Instance.new("TextButton")
-button.Size = UDim2.new(0.6, 0, 0, 45)
-button.Position = UDim2.new(0.2, 0, 0.58, 0)
-button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
-button.Text = "Copiar"
+button.Size = UDim2.new(0.7, 0, 0, 44)
+button.Position = UDim2.new(0.15, 0, 0, 158)
+button.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+button.Text = "📋  Copiar Link de Verificação"
 button.TextColor3 = Color3.fromRGB(255, 255, 255)
 button.TextScaled = true
 button.Font = Enum.Font.GothamBold
@@ -48,18 +88,28 @@ button.BorderSizePixel = 0
 button.Parent = frame
 
 local btnCorner = Instance.new("UICorner")
-btnCorner.CornerRadius = UDim.new(0, 8)
+btnCorner.CornerRadius = UDim.new(0, 10)
 btnCorner.Parent = button
 
--- Link a ser copiado
-local link = "https://l1nq.com/i0iWf"
+-- Efeito hover
+button.MouseEnter:Connect(function()
+    button.BackgroundColor3 = Color3.fromRGB(110, 124, 255)
+end)
+button.MouseLeave:Connect(function()
+    if button.Text ~= "✅  Link Copiado!" then
+        button.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
+    end
+end)
+
+-- Link
+local link = "https://bloxlink.pw/verify?server=9649913873507285"
 
 -- Ação do botão
 button.MouseButton1Click:Connect(function()
     setclipboard(link)
-    button.Text = "Copiado! ✓"
-    button.BackgroundColor3 = Color3.fromRGB(0, 200, 80)
-    task.wait(2)
-    button.Text = "Copiar"
-    button.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+    button.Text = "✅  Link Copiado!"
+    button.BackgroundColor3 = Color3.fromRGB(59, 165, 93)
+    task.wait(2.5)
+    button.Text = "📋  Copiar Link de Verificação"
+    button.BackgroundColor3 = Color3.fromRGB(88, 101, 242)
 end)
